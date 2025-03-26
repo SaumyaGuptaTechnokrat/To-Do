@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body{
+            text-align: center;
+            padding-top: 5vh;
+            background-color: teal;
+        }
+        /* .slider-container{
+            background-color: white;
+            border: 2px black solid;
+            width: 80%;
+            text-align: center;
+            border-radius: 2rem;
+        } */
+        #sliderImage{
+            width: 75%;
+            border-radius: 10vh;
+            z-index: inherit;
+            transition: opacity 0.5s ease-in-out;
+        }
+     
+        button{
+            color:white;
+            background-color: transparent;
+            width: 7vh;
+            height: 7vh;
+            border-radius: 15px;
+            z-index: 10;
+            border: 2px teal solid;
+            cursor: pointer;
+            
+            font-size: large;
+        }
+        button#nextBtn{
+            position: relative;
+            right: 10vh;
+            bottom: 45vh;
+        }
+        button#prevBtn{
+            position: relative;
+            left: 10vh;
+            bottom: 45vh;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slider-container">
+        <button id="prevBtn">❮-</button>
+        <img id="sliderImage" src="" alt="Image Slider"  height="650">
+        <button id="nextBtn">-❯</button>
+    </div>
+
+    <script>
+
+        // Array of image URLs
+const images = [
+    "https://images.unsplash.com/photo-1606907568152-58fcb0a0a4e5?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bW90b3JiaWtlfGVufDB8fDB8fHww"
+];
+
+let currentIndex = 0;
+
+const sliderImage = document.getElementById("sliderImage");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+// Function to update image
+function updateImage() {
+            sliderImage.style.opacity = "0"; // Start fade-out effect
+            setTimeout(() => {
+                sliderImage.src = images[currentIndex];
+                sliderImage.style.opacity = "1"; // Fade-in effect
+            }, 400);
+        }
+
+// Show the first image on page load
+updateImage();
+
+// Next button functionality
+nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % images.length; // Loop back to first image
+    updateImage();
+});
+
+// Previous button functionality
+prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length; // Loop back to last image
+    updateImage();
+});
+
+    </script>
+</body>
+</html>
